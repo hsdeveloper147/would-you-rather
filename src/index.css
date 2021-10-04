@@ -1,0 +1,148 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  color: #252525;
+}
+
+a {
+  text-decoration: none;
+  color: #252525;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 10px;
+}
+ul {
+  padding-left: 0;
+}
+
+li {
+  list-style-type: none;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.nav-avatar {
+  display: inline-block;
+  border-radius: 50%;
+  padding-right: 8px;
+}
+
+.login-ui {
+  width: "30%";
+  margin: "auto";
+  text-align: "center";
+  line-height: 2;
+}
+.result-text {
+  font-weight: bold;
+  text-align: center;
+  font-size: small;
+}
+.result-box-grid {
+  border: 2px ridge #da2828;
+  border-radius: 10px;
+  background-color: #da2828;
+  margin: 10px;
+  color: white;
+  text-align: center;
+}
+.dashboard-menu {
+  display: flex;
+  justify-content: space-evenly;
+}
+.dashboard-grid {
+  border: 10px ridge tomato;
+  border-radius: 10px;
+}
+.board {
+  border: 5px ridge tomato;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+.board-pic {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  border: 10px groove tomato;
+  border-radius: 50%;
+  padding: 10px;
+}
+.leader-board {
+  margin-top: 7em;
+}
+.name-section {
+  font-size: x-large;
+  color: tomato;
+  font-weight: bolder;
+  line-height: 2em;
+}
+.num-section {
+  font-size: large;
+  color: black;
+  font-weight: bolder;
+  line-height: 2em;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+.score-text {
+  padding: 0%;
+  font-size: x-large;
+  font-weight: bolder;
+  background-color: tomato;
+  color: white;
+  text-align: center;
+}
+.circle {
+  border-radius: 50%;
+  border: 8px ridge rgb(232, 134, 134);
+  background-color: red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70%;
+  margin: auto;
+  text-align: center;
+}
+
+.circle:after {
+  content: "";
+  padding-bottom: 100%;
+}
+
+.big {
+  font-size: 30px;
+  color: white;
+}
+
+.your-vote {
+  background-color: gold;
+  color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  float: inline-start;
+  border: 4px greenyellow ridge;
+}
+.len-zero-text {
+  width: 100%;
+  font-size: xx-large;
+  text-align: center;
+  color: tomato;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.new-ques-block {
+  border-radius: 50px;
+  color: white;
+  text-align: center;
+  line-height: 3em;
+  border: 8px ridge rgb(232, 134, 134);
+  background-color: red;
+}
