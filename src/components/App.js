@@ -10,7 +10,6 @@ import Leaderboard from "./Leaderboard";
 import Login from "./Login";
 import { Container } from "semantic-ui-react";
 import RequireLogin from "./RequireLogin";
-import Question from "./Question";
 import QuestionVote from "./QuestionVote";
 
 class App extends Component {
@@ -58,7 +57,6 @@ class App extends Component {
   render() {
     const { loggedIn, loading } = this.props;
     const margin = loggedIn ? "7em" : "0em";
-    const path = window.location.pathname;
     return (
       <BrowserRouter basename="would-you-rather">
         <Switch>
