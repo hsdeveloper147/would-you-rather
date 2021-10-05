@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
 import { Container, Form, Button, Label, Icon } from "semantic-ui-react";
 import { handleAddQuestion } from "../actions/shared";
 
@@ -33,6 +33,7 @@ class NewQuestion extends Component {
     };
     this.props.dispatch(handleAddQuestion(question));
     this.setState({ toHome: true });
+    this.props.history.push("/dashboard");
   };
   render() {
     const { toHome, optionOneText, optionTwoText } = this.state;
@@ -94,4 +95,4 @@ function mapStateToProps({ users, questions, authedUser }) {
   };
 }
 
-export default connect(mapStateToProps)(NewQuestion);
+export default withRouter(connect(mapStateToProps)(NewQuestion));

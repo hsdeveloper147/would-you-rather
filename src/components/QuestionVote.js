@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
 import { Button, Container, Label, Icon } from "semantic-ui-react";
 import Question from "./Question";
+import InvalidQuestion from "./InvalidQuestion";
 
 class QuestionVote extends Component {
   state = { toHome: false };
@@ -11,9 +12,26 @@ class QuestionVote extends Component {
       toHome: true,
     }));
   };
+  get_path = () => window.location.pathname;
+
   render() {
+    console.log("path", this.get_path());
+    const id = this.get_path().split("/")[2];
+    console.log("ID", id);
+
+    let optionVotes;
+    if (this.props.location.state) {
+      optionVotes = this.props.location.state;
+    } else {
+      optionVotes = this.props.optionVotes;
+    }
+
+    const question = this.props.questions[id];
     if (this.state.toHome) {
       return <Redirect to="/dashboard" />;
+    }
+    if (question == null) {
+      return <InvalidQuestion />;
     }
     return (
       <Container
@@ -24,11 +42,7 @@ class QuestionVote extends Component {
           textAlign: "center",
         }}
       >
-        <Question
-          id={this.props.location.state.id}
-          optionVotes={this.props.location.state.optionVotes}
-          display="false"
-        />
+        <Question id={id} optionVotes={optionVotes} display="false" />
         <Button
           as="div"
           animated="vertical"
@@ -49,4 +63,10 @@ class QuestionVote extends Component {
   }
 }
 
-export default connect()(QuestionVote);
+function mapStateToProps({ questions }) {
+  return {
+    questions,
+  };
+}
+
+export default connect(mapStateToProps)(withRouter(QuestionVote));

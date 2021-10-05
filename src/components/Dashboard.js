@@ -68,7 +68,7 @@ class Dashboard extends Component {
                       <Question
                         id={id}
                         display="true"
-                        optionVotes={quesAnsweredCount[id]}
+                        optionVotes={quesAnsweredCount}
                       />
                     </li>
                   ))}
@@ -86,7 +86,7 @@ class Dashboard extends Component {
                       <Question
                         id={id}
                         display="true"
-                        optionVotes={quesAnsweredCount[id]}
+                        optionVotes={quesAnsweredCount}
                       />
                     </li>
                   ))}

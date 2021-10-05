@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Menu, Icon, Container, Image } from "semantic-ui-react";
-import { NavLink } from "react-router-dom";
+import { NavLink, withRouter } from "react-router-dom";
 import { resetAuthedUser } from "../actions/authedUser";
 
 class Nav extends Component {
@@ -11,6 +11,8 @@ class Nav extends Component {
     this.setState({ activeItem: name });
     if (name === "logout") {
       this.props.dispatch(resetAuthedUser());
+
+      this.props.history.push("/");
     }
   };
 
@@ -100,4 +102,4 @@ function mapStateToProps({ authedUser, users }) {
   };
 }
 
-export default connect(mapStateToProps)(Nav);
+export default withRouter(connect(mapStateToProps)(Nav));

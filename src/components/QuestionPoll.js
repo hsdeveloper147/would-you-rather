@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
 import { Form, Radio, Button, Icon, Label, Card } from "semantic-ui-react";
 import { handleAddAnsweredQuestion } from "../actions/shared";
 
@@ -17,6 +17,7 @@ class QuestionPoll extends Component {
     this.props.dispatch(
       handleAddAnsweredQuestion(this.props.id, this.state.val)
     );
+    // this.props.history.push("/dashboard");
   };
 
   render() {
@@ -32,7 +33,6 @@ class QuestionPoll extends Component {
           to={{
             pathname: `/question/${id}`,
             state: {
-              id: this.props.question.id,
               optionVotes: this.props.optionVotes,
             },
           }}
@@ -136,4 +136,4 @@ function mapStateToProps(
   };
 }
 
-export default connect(mapStateToProps)(QuestionPoll);
+export default withRouter(connect(mapStateToProps)(QuestionPoll));

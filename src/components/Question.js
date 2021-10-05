@@ -3,14 +3,11 @@ import { connect } from "react-redux";
 import Poll from "./QuestionPoll";
 import { Card, Image, Grid } from "semantic-ui-react";
 import Result from "./Result";
-import InvalidQuestion from "./InvalidQuestion";
 
 class Question extends Component {
   render() {
     const { authedUser, question, users, display, optionVotes } = this.props;
-    if (question == null) {
-      return <InvalidQuestion />;
-    }
+
     const questionId = question.id;
 
     const quesAuthor = users[question.author];
@@ -23,6 +20,7 @@ class Question extends Component {
     if (answered) {
       answerVoted = users[authedUser]["answers"][questionId];
     }
+
     return (
       <Card fluid>
         <Grid celled="internally">
@@ -60,9 +58,6 @@ function mapStateToProps(
   { users, questions, authedUser },
   { id, display, optionVotes }
 ) {
-  console.log("deb");
-  console.log(questions);
-  console.log(id);
   const question = questions[id];
 
   return {

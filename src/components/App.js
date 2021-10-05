@@ -11,6 +11,7 @@ import Login from "./Login";
 import { Container } from "semantic-ui-react";
 import RequireLogin from "./RequireLogin";
 import QuestionVote from "./QuestionVote";
+import InvalidQuestion from "./InvalidQuestion";
 
 class App extends Component {
   state = { quesAnsweredCount: {} };
@@ -57,8 +58,9 @@ class App extends Component {
   render() {
     const { loggedIn, loading } = this.props;
     const margin = loggedIn ? "7em" : "0em";
+
     return (
-      <BrowserRouter basename="would-you-rather">
+      <BrowserRouter>
         <Switch>
           <Fragment>
             {loading === true ? (
@@ -79,18 +81,10 @@ class App extends Component {
                     <Leaderboard />
                   </RequireLogin>
                   <RequireLogin exact path="/question/:id" loggedIn={loggedIn}>
-                    {/* <QuestionVote
-                      id={path.split("/")[3]}
+                    <QuestionVote
                       display="false"
-                      optionVotes={
-                        this.state.quesAnsweredCount[path.split("/")[3]]
-                      }
-                    /> */}
-                    {/* <QuestionVote /> */}
-                    <Route
-                      path="/question/:id"
-                      render={(props) => <QuestionVote {...props} />}
-                    ></Route>
+                      optionVotes={this.state.quesAnsweredCount}
+                    />
                   </RequireLogin>
                   <Route exact path="/">
                     {loggedIn ? (
@@ -101,6 +95,9 @@ class App extends Component {
                       <Login />
                     )}
                   </Route>
+                  {/* <RequireLogin exact path="*" loggedIn={loggedIn}>
+                    <InvalidQuestion />
+                  </RequireLogin> */}
                 </Container>
               </div>
             )}
