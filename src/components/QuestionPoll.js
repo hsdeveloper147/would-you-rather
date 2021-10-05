@@ -17,7 +17,6 @@ class QuestionPoll extends Component {
     this.props.dispatch(
       handleAddAnsweredQuestion(this.props.id, this.state.val)
     );
-    // this.props.history.push("/dashboard");
   };
 
   render() {

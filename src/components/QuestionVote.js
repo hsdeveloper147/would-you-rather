@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Redirect, withRouter } from "react-router-dom";
 import { Button, Container, Label, Icon } from "semantic-ui-react";
 import Question from "./Question";
 import InvalidQuestion from "./InvalidQuestion";
+import { Redirect } from "react-router-dom";
 
 class QuestionVote extends Component {
   state = { toHome: false };
@@ -15,12 +15,10 @@ class QuestionVote extends Component {
   get_path = () => window.location.pathname;
 
   render() {
-    console.log("path", this.get_path());
     const id = this.get_path().split("/")[2];
-    console.log("ID", id);
 
     let optionVotes;
-    if (this.props.location.state) {
+    if (this.props.location && this.props.location.state) {
       optionVotes = this.props.location.state;
     } else {
       optionVotes = this.props.optionVotes;
@@ -69,4 +67,4 @@ function mapStateToProps({ questions }) {
   };
 }
 
-export default connect(mapStateToProps)(withRouter(QuestionVote));
+export default connect(mapStateToProps)(QuestionVote);

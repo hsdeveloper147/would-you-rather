@@ -5,6 +5,7 @@ import { Card, Image, Dropdown, Container } from "semantic-ui-react";
 import gamePic from "../images/game_pic.jpeg";
 import { dropdownUsersList } from "../utils/formatter";
 import { setAuthedUser } from "../actions/authedUser";
+import { withRouter } from "react-router-dom";
 
 class Login extends Component {
   state = { userList: [] };
@@ -52,6 +53,7 @@ class Login extends Component {
                   options={userList}
                   onChange={(e, data) => {
                     this.props.dispatch(setAuthedUser(data.value));
+                    // this.props.history.push("/dashboard");
                   }}
                 />
               </Card.Content>
@@ -89,4 +91,4 @@ function mapStateToProps({ users }) {
   };
 }
 
-export default connect(mapStateToProps)(Login);
+export default withRouter(connect(mapStateToProps)(Login));

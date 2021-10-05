@@ -38,7 +38,7 @@ class NewQuestion extends Component {
   render() {
     const { toHome, optionOneText, optionTwoText } = this.state;
     if (toHome === true) {
-      return <Redirect to="/dashboard" />;
+      return <Redirect to="" />;
     }
 
     return (

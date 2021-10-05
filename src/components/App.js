@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import LoadingBar from "react-redux-loading";
 import { handleInitialData } from "../actions/shared";
@@ -11,7 +11,7 @@ import Login from "./Login";
 import { Container } from "semantic-ui-react";
 import RequireLogin from "./RequireLogin";
 import QuestionVote from "./QuestionVote";
-import InvalidQuestion from "./InvalidQuestion";
+import InvalidPage from "./InvalidPage";
 
 class App extends Component {
   state = { quesAnsweredCount: {} };
@@ -60,50 +60,46 @@ class App extends Component {
     const margin = loggedIn ? "7em" : "0em";
 
     return (
-      <BrowserRouter>
-        <Switch>
-          <Fragment>
-            {loading === true ? (
-              <LoadingBar style={{ backgroundColor: "red", height: "5px" }} />
-            ) : (
-              <div>
-                {loggedIn && <Nav />}
-                <Container text style={{ marginTop: `${margin}` }}>
-                  <RequireLogin exact path="/dashboard" loggedIn={loggedIn}>
+      <Fragment>
+        {loading === true ? (
+          <LoadingBar style={{ backgroundColor: "red", height: "5px" }} />
+        ) : (
+          <div>
+            {loggedIn && <Nav />}
+            <Container text style={{ marginTop: `${margin}` }}>
+              <Switch>
+                <RequireLogin path="/dashboard" loggedIn={loggedIn}>
+                  <Dashboard quesAnsweredCount={this.state.quesAnsweredCount} />
+                </RequireLogin>
+                <RequireLogin path="/add" loggedIn={loggedIn}>
+                  <NewQuestion />
+                </RequireLogin>
+                <RequireLogin path="/leaderboard" loggedIn={loggedIn}>
+                  <Leaderboard />
+                </RequireLogin>
+                <RequireLogin path="/question/:id" loggedIn={loggedIn}>
+                  <QuestionVote
+                    display="false"
+                    optionVotes={this.state.quesAnsweredCount}
+                  />
+                </RequireLogin>
+                <Route exact path="/">
+                  {loggedIn ? (
                     <Dashboard
                       quesAnsweredCount={this.state.quesAnsweredCount}
                     />
-                  </RequireLogin>
-                  <RequireLogin exact path="/add" loggedIn={loggedIn}>
-                    <NewQuestion />
-                  </RequireLogin>
-                  <RequireLogin exact path="/leaderboard" loggedIn={loggedIn}>
-                    <Leaderboard />
-                  </RequireLogin>
-                  <RequireLogin exact path="/question/:id" loggedIn={loggedIn}>
-                    <QuestionVote
-                      display="false"
-                      optionVotes={this.state.quesAnsweredCount}
-                    />
-                  </RequireLogin>
-                  <Route exact path="/">
-                    {loggedIn ? (
-                      <Dashboard
-                        quesAnsweredCount={this.state.quesAnsweredCount}
-                      />
-                    ) : (
-                      <Login />
-                    )}
-                  </Route>
-                  {/* <RequireLogin exact path="*" loggedIn={loggedIn}>
-                    <InvalidQuestion />
-                  </RequireLogin> */}
-                </Container>
-              </div>
-            )}
-          </Fragment>
-        </Switch>
-      </BrowserRouter>
+                  ) : (
+                    <Login />
+                  )}
+                </Route>
+                <RequireLogin path="*" loggedIn={loggedIn}>
+                  <InvalidPage />
+                </RequireLogin>
+              </Switch>
+            </Container>
+          </div>
+        )}
+      </Fragment>
     );
   }
 }
